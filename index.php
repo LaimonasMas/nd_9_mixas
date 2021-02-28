@@ -1,4 +1,5 @@
 <?php
+session_start();
 
 $smart1 = '<label for="a"><img src="868b2d51606830495ab76508a7aa3123.jpg" alt=""></label><input type="checkbox" name="checkbox[]" value="4" id="a"';
 $smart2 = '<label for="a"><img src="95da9fdeeedb367f67b2f0b8d154a3bd.jpg" alt=""></label><input type="checkbox" name="checkbox[]" value="5" id="a"';
@@ -26,9 +27,11 @@ $arrayAll = [$smart1, $smart2, $smart3, $smart4, $smart5, $landLine1, $landLine2
         .top-item input {
             display: none;
         }
+
         img {
             margin: 30px;
         }
+
         input {
             margin: 0 100px 0 -100px;
         }
@@ -61,30 +64,38 @@ $arrayAll = [$smart1, $smart2, $smart3, $smart4, $smart5, $landLine1, $landLine2
     </div>
     <?php
     if (isset($_POST['checkbox'])) {
-        $countAll = $_POST['checkbox'];
+        $_SESSION['checkboxCount'] = $_POST['checkbox'];
     }
-    if (isset($_POST) && (isset($countAll)) && (count($countAll) == 1) && !isset($_POST['button'])) {
+    _d($_POST['button']);
+    if (isset($_POST) && !isset($_POST['button'])) {
         echo '';
+        _d(isset($_POST['button']));
+        _d($_SESSION['checkboxCount']);
         unset($_POST);
-        unset($countAll);
-    } else if ((isset($countAll)) && (count($countAll) == 1) && isset($_POST['button'])) {
+        session_destroy();
+        _d('1 if\'as');        
+    } else if ((isset($_SESSION['checkboxCount'])) && (count($_SESSION['checkboxCount']) == 1) && isset($_POST['button'])) {
         echo '';
+        _d(isset($_POST['button']));
+        _d($_SESSION['checkboxCount']);
         unset($_POST);
-        unset($countAll);
-    }else if (isset($_POST['button']) && (count($countAll) == 1)) {
-        echo '<h1 style="color: red">Tu esi robotas</h1>';
-        unset($_POST);
-        unset($countAll);
-    } else if (isset($countAll) && (array_sum($countAll) == 123 || array_sum($countAll) == 51)) {
+        session_destroy();
+               _d('2 if\'as');               
+    } else if (isset($_SESSION['checkboxCount']) && (array_sum($_SESSION['checkboxCount']) == 123 || array_sum($_SESSION['checkboxCount']) == 51)) {
         echo '<h1 style="color: green">Tu žmogus</h1>';
+        _d(isset($_POST['button']));
+        _d($_SESSION['checkboxCount']);
         unset($_POST);
-        unset($countAll);
-    } else if (isset($countAll) && (array_sum($countAll) != 123 || array_sum($countAll) != 51)) {
+        session_destroy();
+               _d('3 if\'as');               
+    } else if (isset($_SESSION['checkboxCount']) && (array_sum($_SESSION['checkboxCount']) != 123 || array_sum($_SESSION['checkboxCount']) != 51)) {
         echo '<h1 style="color: red">Tu esi robotas</h1>';
+        _d(isset($_POST['button']));
+        _d($_SESSION['checkboxCount']);
         unset($_POST);
-        unset($countAll);
+        session_destroy();
+               _d('4 if\'as');               
     }
-
     ?>
 </body>
 
