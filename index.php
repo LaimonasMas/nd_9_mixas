@@ -63,35 +63,31 @@ $arrayAll = [$smart1, $smart2, $smart3, $smart4, $smart5, $landLine1, $landLine2
         </form>
     </div>
     <?php
-    if (isset($_POST['checkbox'])) {
+    if (isset($_POST['checkbox']) && !isset($_SESSION['checkboxCount'])) {
+        // $_SESSION['checkboxCount'] = 0;
         $_SESSION['checkboxCount'] = $_POST['checkbox'];
     }
-    _d($_POST['button']);
     if (isset($_POST) && !isset($_POST['button'])) {
         echo '';
         _d(isset($_POST['button']));
-        _d($_SESSION['checkboxCount']);
         unset($_POST);
         session_destroy();
         _d('1 if\'as');        
     } else if ((isset($_SESSION['checkboxCount'])) && (count($_SESSION['checkboxCount']) == 1) && isset($_POST['button'])) {
         echo '';
         _d(isset($_POST['button']));
-        _d($_SESSION['checkboxCount']);
         unset($_POST);
         session_destroy();
                _d('2 if\'as');               
     } else if (isset($_SESSION['checkboxCount']) && (array_sum($_SESSION['checkboxCount']) == 123 || array_sum($_SESSION['checkboxCount']) == 51)) {
         echo '<h1 style="color: green">Tu žmogus</h1>';
         _d(isset($_POST['button']));
-        _d($_SESSION['checkboxCount']);
         unset($_POST);
         session_destroy();
                _d('3 if\'as');               
     } else if (isset($_SESSION['checkboxCount']) && (array_sum($_SESSION['checkboxCount']) != 123 || array_sum($_SESSION['checkboxCount']) != 51)) {
         echo '<h1 style="color: red">Tu esi robotas</h1>';
         _d(isset($_POST['button']));
-        _d($_SESSION['checkboxCount']);
         unset($_POST);
         session_destroy();
                _d('4 if\'as');               
